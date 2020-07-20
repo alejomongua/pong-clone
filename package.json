@@ -1,0 +1,54 @@
+{
+  "name": "pong-clone",
+  "version": "1.0.0",
+  "description": "Tutorial de creación de un clon de pong en Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx eslint src/**/*.js config/webpack.config.js",
+    "eslintFix": "npx eslint --fix src/*.js config/webpack.config.js",
+    "devServer": "npx webpack-dev-server --config=config/webpack.config.js --mode development --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alejomongua/pong-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alejomongua/pong-clone/issues"
+  },
+  "homepage": "https://github.com/alejomongua/pong-clone#readme",
+  "dependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/register": "^7.10.5",
+    "autoprefixer": "^9.8.5",
+    "babel-loader": "^8.1.0",
+    "bootstrap": "^5.0.0-alpha1",
+    "css-loader": "^3.6.0",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "postcss-loader": "^3.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.10.5",
+    "eslint": "^7.5.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-standard": "^4.0.1",
+    "react-hot-loader": "^4.12.21",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
