@@ -4,8 +4,8 @@
   "description": "Tutorial de creación de un clon de pong en Javascript",
   "main": "index.js",
   "scripts": {
-    "test": "npx eslint src/**/*.js config/webpack.config.js",
-    "eslintFix": "npx eslint --fix src/*.js config/webpack.config.js",
+    "test": "npx eslint config/webpack.config.js; find src -name *.js | xargs -I{} npx eslint {}",
+    "eslintFix": "npx eslint --fix config/webpack.config.js; find src -name *.js | xargs -I{} npx eslint --fix {}",
     "devServer": "npx webpack-dev-server --config=config/webpack.config.js --mode development --hot"
   },
   "repository": {
