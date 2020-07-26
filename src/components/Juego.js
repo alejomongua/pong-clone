@@ -1,7 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-const width = 640
-const height = 480
 const anchoJugador = 10
 const altoJugador = 100
 const radioPelota = 10
@@ -11,7 +10,6 @@ const velocidadJugador = 10
 const velocidadInicialPelota = 5
 const tickInterval = 20
 
-const posicionXJugador2 = width - anchoJugador - offsetJugador
 const reboteJugador1 = anchoJugador + offsetJugador
 
 class Juego extends React.Component {
@@ -19,10 +17,15 @@ class Juego extends React.Component {
     const posicionInicial = 100
 
     super(props)
+
+    this.width = props.width
+    this.height = props.height
+    this.posicionXJugador2 = this.width - anchoJugador - offsetJugador
+
     this.state = {
       pelota: {
-        positionX: width / 2,
-        positionY: height / 2,
+        positionX: this.width / 2,
+        positionY: this.height / 2,
         velocidadX: velocidadInicialPelota,
         velocidadY: velocidadInicialPelota
       },
@@ -100,17 +103,24 @@ class Juego extends React.Component {
       estado.pelota.positionX = estadoActual.pelota.positionX + estadoActual.pelota.velocidadX
       estado.pelota.positionY = estadoActual.pelota.positionY + estadoActual.pelota.velocidadY
 
-      if (estado.pelota.positionX === posicionXJugador2 && Math.abs(estado.pelota.positionY - estado.j2) <= altoJugador) {
-        estado.pelota.velocidadX = -estado.pelota.velocidadX
-        estado.pelota.positionX = estadoActual.pelota.positionX + estado.pelota.velocidadX
+      if (estado.pelota.positionX === this.posicionXJugador2) {
+        // Si la pelota llegó hasta la posición en X del jugador 2
+        const colision = estado.pelota.positionY - estado.j2
+        if (colision <= altoJugador && colision > 0) {
+          estado.pelota.velocidadX = -estado.pelota.velocidadX
+          estado.pelota.positionX = estadoActual.pelota.positionX + estado.pelota.velocidadX
+        }
       }
 
-      if (estado.pelota.positionX === reboteJugador1 && Math.abs(estado.pelota.positionY - estado.j1) <= altoJugador) {
-        estado.pelota.velocidadX = -estado.pelota.velocidadX
-        estado.pelota.positionX = estadoActual.pelota.positionX + estado.pelota.velocidadX
+      if (estado.pelota.positionX === reboteJugador1) {
+        const colision = estado.pelota.positionY - estado.j1
+        if (colision <= altoJugador && colision > 0) {
+          estado.pelota.velocidadX = -estado.pelota.velocidadX
+          estado.pelota.positionX = estadoActual.pelota.positionX + estado.pelota.velocidadX
+        }
       }
 
-      if (estadoActual.pelota.positionY >= height || estadoActual.pelota.positionY <= 0) {
+      if (estadoActual.pelota.positionY >= this.height || estadoActual.pelota.positionY <= 0) {
         estado.pelota.velocidadY = -estado.pelota.velocidadY
         estado.pelota.positionY = estadoActual.pelota.positionY + estado.pelota.velocidadY
       }
@@ -137,13 +147,18 @@ class Juego extends React.Component {
 
   render () {
     return (
-      <svg width={width} height={height}>
+      <svg width={this.width} height={this.height}>
         <rect x={offsetJugador} y={this.state.j1} width={anchoJugador} height={altoJugador} fill={colorJugadorPelota} />
-        <rect x={posicionXJugador2} y={this.state.j2} width={anchoJugador} height={altoJugador} fill={colorJugadorPelota} />
+        <rect x={this.posicionXJugador2} y={this.state.j2} width={anchoJugador} height={altoJugador} fill={colorJugadorPelota} />
         <circle cx={this.state.pelota.positionX} cy={this.state.pelota.positionY} r={radioPelota} fill={colorJugadorPelota} />
       </svg>
     )
   }
 }
+
+Juego.propTypes = { 
+  width: PropTypes.number,
+  height: PropTypes.number,
+ }
 
 export default Juego
